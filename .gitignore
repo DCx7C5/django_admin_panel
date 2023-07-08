@@ -6,6 +6,8 @@ __pycache__/
 local_settings.py
 db.sqlite3
 
+admin_panel/*/migrations
+
 # Virtual Environment
 .env
 venv/
