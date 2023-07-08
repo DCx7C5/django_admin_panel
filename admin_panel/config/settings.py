@@ -68,7 +68,7 @@ DATABASES = {
         'NAME': "apdb_devel",
         'USER': "ap_admin",
         'PASSWORD': "ap_pass1234",
-        'HOST': "postgres",
+        'HOST': "",                         # empty to communicate over unix socket
         'PORT': 5432,
     },
 }
