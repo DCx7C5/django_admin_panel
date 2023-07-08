@@ -10,11 +10,8 @@ ENV PYTHONUNBUFFERED 1
 RUN apk update \
     && apk add postgresql-dev gcc python3-dev musl-dev
 
-# install dependencies
-COPY requirements.txt /project/requirements.txt
+COPY admin_panel .
+COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
-
-
-# copy project
-COPY . .
+RUN pip install -r requirements.txt \
+    && rm -rf /root/.cache
