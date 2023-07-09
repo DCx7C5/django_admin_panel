@@ -9,7 +9,6 @@ db.sqlite3
 admin_panel/*/migrations
 
 # Virtual Environment
-.env
 venv/
 env/
 

@@ -1,26 +1,27 @@
-version: '3'
+version: '3.9'
 
 services:
-  django:
+  web:
     build: .
+    container_name: django
     ports:
       - "8000:8000"
-    command: python admin_panel/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/project
       - pgsocket:/var/run/postgresql/
     depends_on:
-      - postgres
+      - db
 
-  postgres:
+  db:
     restart: always
     image: postgres:latest
+    container_name: postgres
     environment:
-      POSTGRES_DB: apdb_devel
+      POSTGRES_DB: ap_devel
       POSTGRES_USER: ap_admin
       POSTGRES_PASSWORD: ap_pass1234
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
       - pgsocket:/var/run/postgresql/

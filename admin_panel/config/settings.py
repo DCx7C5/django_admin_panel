@@ -1,9 +1,11 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / "../../docker.env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -15,7 +17,6 @@ SECRET_KEY = "django-insecure-phj)70^r*h8ld9hosb1*a(k2*vhh=aa6^rp9#m#!2fug4#s&6a
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -65,11 +66,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "apdb_devel",
-        'USER': "ap_admin",
-        'PASSWORD': "ap_pass1234",
-        'HOST': "",                         # empty to communicate over unix socket
-        'PORT': 5432,
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASS'),
+        'HOST': os.getenv('DB_HOST'),       # empty to communicate over unix socket
+        'PORT': os.getenv('DB_PORT'),       # also empty, but ports still open on container to connect IDE with DB
     },
 }
 
