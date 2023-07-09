@@ -5,9 +5,9 @@ set -o errexit
 # exits if any of your variables is not set
 set -o nounset
 
-. docker.env
+. /docker.env
 
-MGMTFILE="/project/admin_panel/manage.py"
+MGMTFILE="manage.py"
 PG_LOCKFILE="/var/run/postgresql/.s.PGSQL.${DB_PORT:-5432}.lock"
 PSQL_CMD="psql --username=$DB_USER --password=$DB_PASS $DB_NAME"
 timeout=20
@@ -43,11 +43,5 @@ fi
 
 echo 'Installing new dependencies...'
 pip install -r /project/requirements.txt
-
-echo 'Creating migrations...'
-python $MGMTFILE makemigrations
-
-echo 'Migrate database...'
-python $MGMTFILE migrate
 
 exec "$@"

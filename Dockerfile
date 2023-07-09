@@ -25,5 +25,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt \
     && rm -rf /root/.cache
 
+WORKDIR /project/admin_panel
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["python", "admin_panel/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+    <nav>
+    <ul>
+        <li>
+            <a href="{% url "core_app:index" %}">Home</a>
+        </li>
+        {% block navlink %}{% endblock navlink %}
+    </ul>
+    </nav>
+{% endblock navbar %}

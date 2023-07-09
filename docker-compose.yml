@@ -4,6 +4,9 @@ services:
   web:
     build: .
     container_name: django
+    command: "gunicorn --bind 0.0.0.0:8000 \
+      --access-logfile - --error-logfile - --log-level debug \
+      config.asgi -w 6 -k uvicorn.workers.UvicornWorker"
     ports:
       - "8000:8000"
     volumes:
@@ -17,9 +20,9 @@ services:
     image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_DB: ap_devel
-      POSTGRES_USER: ap_admin
-      POSTGRES_PASSWORD: ap_pass1234
+      POSTGRES_DB: ${DB_NAME:-ap_devel}
+      POSTGRES_USER: ${DB_USER:-ap_admin}
+      POSTGRES_PASSWORD: ${DB_PASS:-ap_pass1234}
     ports:
       - "5433:5432"
     volumes:
